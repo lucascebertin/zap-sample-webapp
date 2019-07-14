@@ -1,52 +1,52 @@
 version: '3.5'
 
-networks: 
+networks:
   h4ck1ng:
     driver: bridge
 
-services: 
+services:
   webapp:
     build: ./src/webapp
-    environment: 
+    environment:
       APP_ConnectionStrings__DefaultConnection: 'Data Source=mssql;Initial Catalog=VulnDB;User Id=sa;Password=yourStrong(!)Password;'
       DB: mssql:1433
-    ports: 
+    ports:
       - 3000:3000
-    networks: 
+    networks:
       - h4ck1ng
-    depends_on: 
+    depends_on:
       - mssql
       - mssql-tools
 
   zap:
     build: ./src/zap
-    environment: 
+    environment:
       WEBAPP: http://webapp:3000/api/people?name=a
       WEB_BASE_URL: webapp:3000
-    volumes: 
+    volumes:
       - ./volume/zap/reports:/tmp/reports
-    networks: 
+    networks:
       - h4ck1ng
-    depends_on: 
+    depends_on:
       - webapp
       - mssql
 
   mssql:
     image: mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
-    ports: 
+    ports:
       - 1433:1433
-    environment: 
+    environment:
       ACCEPT_EULA: Y
       SA_PASSWORD: yourStrong(!)Password
-    networks: 
+    networks:
       - h4ck1ng
 
   mssql-tools:
     build: ./src/mssql-tools
-    environment: 
+    environment:
       SA_PASSWORD: yourStrong(!)Password
       DB: mssql:1433
       DB_FOR_SQLCMD: mssql,1433
-    networks: 
+    networks:
       - h4ck1ng
 
