@@ -16,11 +16,17 @@ Portanto, a análise será focada em uma API com alguns endpoints e ao estilo bl
 ## Preparando o ambiente
 Para automação, foi escolhido Docker como ferramenta base, assim torna-se rápido e fácil executar localmente tal qual um ambiente de nuvem qualquer, tendo em vista que todos permitem a execução de conteineres.
 Instale a versão docker compatível com seu sistema operacional mas, após a instalação,  certifique-se de ter disponíveis os comandos `docker` e `docker-compose`. Sem eles, não poderemos prosseguir.
+Neste exemplo é usada a imagem do SqlServer2017 e, seus requisitos são:
+- Docker Engine 1.8+
+- Ao menos 2GB de RAM (3.25 GB antes da 2017-CU2)
+- Settar as variáveis de ambiente:
+  * ACCEPT_EULA=Y
+  * SA_PASSWORD=<your_strong_password>
 
 ## Escolha das ferramentas de análise
-Temos um órgão que encabeça uma iniciativa de avaliar e disponibilizar uma lista com as 10 falhas de segurança mais encontradas na internet.
-A [OWASP](https://owasp.org) (Open Web Application Security Project), através do seu TOP 10, nos fornece um bom parâmetro para iniciarmos nossa análise. Não é necessário simplesmente aceitar a lista e ficar apenas com seus itens, sinta-se livre para inovar e adicionar outras ferramentas que façam análises mais aprofundadas de acordo com seu cenário e preocupação.
-Por hora, vamos utilizar o [ZAP](https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project) versão 2.8.0 (Zed Attack Proxy) dentro de nosso ambiente de conteineres.
+Optei por utilizar uma ferramenta chamada ZAP (Zed Attack Proxy) em sua versão 2.8.0.
+Quem está por trás desta ferramenta é um órgão que encabeça uma iniciativa de avaliar e disponibilizar uma lista com as 10 falhas de segurança mais encontradas na internet, a [OWASP](https://owasp.org) (Open Web Application Security Project).
+A `OWASP`, através do seu TOP 10, nos fornece um bom parâmetro para iniciarmos nossa análise e, utilizando sua própria ferramenta, não precisamos nos preocupar em descobrir como configurar para dar ênfase nessa lista.
 
 ## ZAP e linha de comando
 Meu primeiro contato com o ZAP foi através de uma interface gráfica que já vem embutida nele.
