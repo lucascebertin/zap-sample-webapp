@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Vulnerable.Sample.Migration": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "APP_ConnectionStrings:DefaultConnection": "Data Source=127.0.0.1:1433;Initial Catalog=VulnDB;User Id=sa;Password=yourStrong(!)Password;"
+      }
+    }
+  }
+}
